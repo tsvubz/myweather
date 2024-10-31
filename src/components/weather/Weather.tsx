@@ -8,6 +8,8 @@ interface Weather {
     };
 }
 
+const apikey = import.meta.env.VITE_API_KEY;
+
 const Weather = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ const Weather = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${param}&appid=8ed6a9cf881b47f776b90d808d881497`
+        `https://api.openweathermap.org/data/2.5/weather?q=${param}&appid=${apikey}`
       );
 
       const data = await response.json();
