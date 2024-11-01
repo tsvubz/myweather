@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
 import Search from "../search/Search";
+import styles from "./Weather.module.scss"
 
 interface Weather {
     name: string;
     sys: {
         country: string;
+    };
+    weather: Array<{
+      description: string;
+    }>;
+    main: {
+      temp: number;
+      humidity: number;
+      feels_like: number;
+      pressure: number;
+    };
+    wind: {
+      speed: number;
     };
 }
 
@@ -45,7 +58,7 @@ const Weather = () => {
   };
 
   useEffect(() => {
-    fetchWeather('glasgow')
+    fetchWeather('lublin')
   }, [])
 
   console.log(weather)
@@ -60,11 +73,32 @@ const Weather = () => {
       {
         loading ? <div>Loading...</div>
         : <div>
-            <div>
+            <div className={styles.city}>
                 <h2>{weather?.name}, {weather?.sys?.country}</h2>
             </div>
-            <div>
+            <div className={styles.date}>
                 {getCurrentDate()}
+            </div>
+            <div>Temperature: {weather?.main?.temp} Feels Like: {weather?.main.feels_like}</div>
+            <p className={styles.description}>
+              {weather && weather?.weather[0] && weather?.weather[0] ? weather?.weather[0]?.description : " "}
+            </p>
+            <div>
+              <div>
+                <div>
+                  <p>Humidity: {weather?.main?.humidity}</p>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <p>Wind Speed: {weather?.wind?.speed}</p>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <p>Pressure: {weather?.main?.pressure}</p>
+                </div>
+              </div>
             </div>
         </div>
       }
