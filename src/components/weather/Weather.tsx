@@ -61,7 +61,6 @@ const Weather = () => {
     fetchWeather('lublin')
   }, [])
 
-  console.log(weather)
 
   return (
     <>
@@ -79,11 +78,16 @@ const Weather = () => {
             <div className={styles.date}>
                 {getCurrentDate()}
             </div>
-            <div>Temperature: {weather?.main?.temp} Feels Like: {weather?.main.feels_like}</div>
+            <div className={styles.temp}>Temperature: {weather?.main?.temp} </div>
             <p className={styles.description}>
               {weather && weather?.weather[0] && weather?.weather[0] ? weather?.weather[0]?.description : " "}
             </p>
-            <div>
+            <div className={styles.info}>
+              <div>
+                <div>
+                  <p>Feels Like: {weather?.main.feels_like}</p>
+                </div>
+              </div>
               <div>
                 <div>
                   <p>Humidity: {weather?.main?.humidity}</p>
